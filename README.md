@@ -27,4 +27,4 @@ ArtisanConnect is a web platform connecting artisans directly with customers.
 4. Order products
 
 ## Team
-Hackathon Team# artisanconnect
+Catalyst Crew- artisanconnect
