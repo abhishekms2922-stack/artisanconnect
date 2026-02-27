@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+<title>Artisan Dashboard</title>
+<link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+<div class="navbar">
+<h2>ArtisanConnect 🧵</h2>
+
+<div>
+<a href="products.html">Marketplace</a>
+<a href="addproduct.html">Add Product</a>
+<button onclick="logout()">Logout</button>
+</div>
+</div>
+
+<h2 id="welcome" style="text-align:center;margin-top:40px;"></h2>
+
+<p style="text-align:center;">
+You are a verified artisan on ArtisanConnect.
+</p>
+
+<script>
+
+const artisan = localStorage.getItem("artisan");
+
+if(!artisan){
+window.location.href="login.html";
+}
+
+document.getElementById("welcome").innerText =
+"Welcome, " + artisan + " 👋";
+
+function logout(){
+localStorage.removeItem("artisan");
+window.location.href="index.html";
+}
+
+</script>
+
+</body>
+</html>

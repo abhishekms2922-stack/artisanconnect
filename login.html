@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+<title>Artisan Login</title>
+<link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+<div class="navbar">
+<h2>ArtisanConnect 🧵</h2>
+
+<div>
+<a href="index.html">Home</a>
+<a href="products.html">Products</a>
+</div>
+</div>
+
+<h2 style="text-align:center;margin-top:40px;">
+Artisan Login
+</h2>
+
+<div style="text-align:center;margin-top:20px;">
+
+<input id="artisanName" placeholder="Enter Artisan Name">
+
+<br><br>
+
+<button onclick="login()">Login</button>
+
+</div>
+
+<script>
+
+function login(){
+
+const name = document.getElementById("artisanName").value;
+
+if(name===""){
+alert("Enter your name");
+return;
+}
+
+// save login locally
+localStorage.setItem("artisan", name);
+
+// go to dashboard
+window.location.href="dashboard.html";
+
+}
+
+</script>
+
+</body>
+</html>

@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html>
+<head>
+<link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+<div class="navbar">
+<h2>Product Details</h2>
+<a href="products.html">Back</a>
+</div>
+
+<div style="text-align:center;margin-top:40px">
+    <input id="phone"placeholder="Phone Number"
+
+<img id="image" width="300"><br><br>
+
+<h2 id="name"></h2>
+<p class="price" id="price"></p>
+<div class="product-detail">
+
+  <img id="image">
+
+  <div class="details">
+
+      <h2 id="name"></h2>
+
+      <p id="price"></p>
+
+      <p>Authentic handmade Mysore silk product.</p>
+
+      <p class="verified">✔ Verified Artisan</p>
+
+
+      <!-- ✅ ADD THIS PART HERE -->
+      <button onclick="placeOrder()">Order Now</button>
+
+      <div id="orderForm" style="display:none;margin-top:20px;">
+
+        <input id="customerName" placeholder="Your Name"><br><br>
+
+        <input id="phone" placeholder="Phone Number"><br><br>
+
+        <input id="address" placeholder="Delivery Address"><br><br>
+
+        <button onclick="submitOrder()">Confirm Order</button>
+
+      </div>
+      <!-- ✅ END HERE -->
+
+
+  </div>
+
+</div>
+<p class="verified">✔ Verified Artisan</p>
+
+</div>
+
+<script>
+const params=new URLSearchParams(window.location.search);
+
+document.getElementById("name").innerText=params.get("name");
+document.getElementById("price").innerText="₹"+params.get("price");
+document.getElementById("image").src=params.get("image");
+</script>
+<script type="module">
+
+/* 🔥 Import Firebase */
+import { db } from "./firebase.js";
+
+import {
+  collection,
+  addDoc
+} from "https://www.gstatic.com/firebasejs/12.9.0/firebase-firestore.js";
+
+
+/* ✅ Show Order Form */
+window.placeOrder = function () {
+  document.getElementById("orderForm").style.display = "block";
+};
+
+
+/* ✅ Save Order to Firebase */
+window.submitOrder = async function () {
+
+  // Get product info from URL
+  const params = new URLSearchParams(window.location.search);
+
+  const productName = params.get("name");
+  const price = params.get("price");
+
+  // Get customer details
+  const customerName =
+    document.getElementById("customerName").value;
+
+  const phone =
+    document.getElementById("phone").value;
+
+  const address =
+    document.getElementById("address").value;
+
+  try {
+
+    await addDoc(collection(db, "orders"), {
+      productName: productName,
+      price: price,
+      customerName: customerName,
+      phone: phone,
+      address: address,
+      status: "Pending",
+      orderedAt: Date.now()
+    });
+
+    alert("✅ Order placed successfully!");
+
+  } catch (error) {
+    console.error(error);
+    alert("❌ Order failed");
+  }
+
+};
+
+</script>
+</body>
+</html>
